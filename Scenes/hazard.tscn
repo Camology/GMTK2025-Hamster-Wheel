@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bldpiumhcplmg"]
+
+[ext_resource type="Script" uid="uid://ck6aykbif6u1j" path="res://Scenes/hazard.gd" id="1_a5ydo"]
+[ext_resource type="PackedScene" uid="uid://dj05bb5dyf8kn" path="res://models/Bomb.glb" id="1_ci3js"]
+[ext_resource type="AudioStream" uid="uid://cmr8luswj8q0n" path="res://Audio/boom.mp3" id="3_f1kmf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a5ydo"]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("collision_area", "audio")]
+script = ExtResource("1_a5ydo")
+collision_area = NodePath("HazardArea3D")
+audio = NodePath("Audio")
+
+[node name="model" parent="." instance=ExtResource("1_ci3js")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="HazardArea3D" type="Area3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardArea3D"]
+shape = SubResource("SphereShape3D_a5ydo")
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_f1kmf")
+volume_db = -12.0

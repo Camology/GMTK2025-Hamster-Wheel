@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlar6b8myvv5t"]
+
+[ext_resource type="PackedScene" uid="uid://e8417q2hiddo" path="res://models/Window Bars.glb" id="1_2bj67"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Root Scene" parent="." instance=ExtResource("1_2bj67")]

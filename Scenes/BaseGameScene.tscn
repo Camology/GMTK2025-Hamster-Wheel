@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=3 uid="uid://dntx6h0fooey3"]
+
+[ext_resource type="PackedScene" uid="uid://bbbordok1ggit" path="res://Scenes/player.tscn" id="1_duitm"]
+[ext_resource type="PackedScene" uid="uid://dmmdgss5s1jd1" path="res://Scenes/wheel_level.tscn" id="2_m5ago"]
+[ext_resource type="Texture2D" uid="uid://dp26mf2nnp381" path="res://ParticleZ/vintage_measuring_lab_4k.exr" id="3_m5ago"]
+[ext_resource type="AudioStream" uid="uid://erbcqf1hkfgu" path="res://Audio/lab_ambience.wav" id="4_wmgs5"]
+[ext_resource type="AudioStream" uid="uid://cko76m4ld6xwl" path="res://Audio/lab_ambience2.wav" id="5_rlfp5"]
+[ext_resource type="Script" uid="uid://hrdpvlconlbr" path="res://Scenes/pause_node.gd" id="6_d2hfb"]
+[ext_resource type="Texture2D" uid="uid://dtf5jw7x4r2vu" path="res://stars-in-the-night-sky-1738756836.jpg" id="7_bgbq1"]
+[ext_resource type="PackedScene" uid="uid://e8417q2hiddo" path="res://models/Window Bars.glb" id="7_dpce0"]
+[ext_resource type="AudioStream" uid="uid://du6geu2gk5tar" path="res://Audio/pause.ogg" id="8_c0h45"]
+[ext_resource type="FontFile" uid="uid://cnuve28wpuwkq" path="res://MockeryRegular-X3BAP.ttf" id="8_kb4ly"]
+
+[sub_resource type="GDScript" id="GDScript_kbgao"]
+script/source = "extends MeshInstance3D
+"
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wmgs5"]
+panorama = ExtResource("3_m5ago")
+
+[sub_resource type="Sky" id="Sky_rlfp5"]
+sky_material = SubResource("PanoramaSkyMaterial_wmgs5")
+
+[sub_resource type="Environment" id="Environment_d2hfb"]
+background_mode = 2
+sky = SubResource("Sky_rlfp5")
+adjustment_enabled = true
+adjustment_brightness = 0.75
+adjustment_contrast = 1.93
+adjustment_saturation = 1.84
+
+[node name="BaseGameScene" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_duitm")]
+transform = Transform3D(1, 0, 0, 0, 0.998821, 0.048536, 0, -0.048536, 0.998821, 0.64599, -0.0697129, 0)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("2_m5ago")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42048, 0)
+script = SubResource("GDScript_kbgao")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d2hfb")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wmgs5")
+volume_db = -5.0
+autoplay = true
+
+[node name="BackgroundMusic2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rlfp5")
+autoplay = true
+
+[node name="Pause_Node" type="Node" parent="." node_paths=PackedStringArray("pause_screen", "exit_button", "pause_wallpaper", "audio")]
+process_mode = 3
+script = ExtResource("6_d2hfb")
+pause_screen = NodePath("CanvasLayer")
+exit_button = NodePath("CanvasLayer/Menu/Quit")
+pause_wallpaper = NodePath("CanvasLayer/Menu/TextureRect")
+audio = NodePath("CanvasLayer/AudioStreamPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Pause_Node"]
+visible = false
+
+[node name="Menu" type="ColorRect" parent="Pause_Node/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.11145, 1.10766)
+color = Color(0.211765, 0.337255, 0.333333, 0.929412)
+
+[node name="TextureRect" type="TextureRect" parent="Pause_Node/CanvasLayer/Menu"]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.29803
+offset_top = -0.902802
+offset_right = 633.702
+offset_bottom = 550.097
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.830151, 0.782979)
+texture = ExtResource("7_bgbq1")
+
+[node name="Resume" type="Button" parent="Pause_Node/CanvasLayer/Menu"]
+layout_mode = 1
+offset_left = 21.5934
+offset_top = 124.587
+offset_right = 348.593
+offset_bottom = 192.587
+rotation = -0.173462
+scale = Vector2(1.89937, 1.10485)
+theme_override_fonts/font = ExtResource("8_kb4ly")
+theme_override_font_sizes/font_size = 30
+text = "RESUME
+"
+
+[node name="Quit" type="Button" parent="Pause_Node/CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 260.0
+offset_top = 109.0
+offset_right = 440.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.52785
+scale = Vector2(1.41686, 0.768949)
+theme_override_fonts/font = ExtResource("8_kb4ly")
+theme_override_font_sizes/font_size = 30
+text = "QUIT"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Pause_Node/CanvasLayer"]
+stream = ExtResource("8_c0h45")
+volume_db = -5.0
+autoplay = true
+parameters/looping = true
+
+[node name="Wall1" parent="." instance=ExtResource("7_dpce0")]
+transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 3.27171, -8.67033, 0.261644)
+
+[node name="Wall2" parent="." instance=ExtResource("7_dpce0")]
+transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -2.16964, -8.67033, 0.261644)
+
+[connection signal="pressed" from="Pause_Node/CanvasLayer/Menu/Resume" to="Pause_Node" method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause_Node/CanvasLayer/Menu/Quit" to="Pause_Node" method="_on_quit_pressed"]

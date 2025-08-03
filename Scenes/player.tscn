@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbbordok1ggit"]
+
+[ext_resource type="PackedScene" uid="uid://ca03qkeov6o47" path="res://Scenes/hamster.tscn" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://dyq6y3lfpk5um" path="res://Scripts/PlayerMechanics.gd" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bcxfr72m8f465" path="res://Scenes/label_script.gd" id="3_6t5aa"]
+[ext_resource type="FontFile" uid="uid://cnuve28wpuwkq" path="res://MockeryRegular-X3BAP.ttf" id="3_fkybt"]
+[ext_resource type="AudioStream" uid="uid://bpr8a4013r2js" path="res://Audio/yummy.wav" id="4_vgqql"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("yummy_audio")]
+script = ExtResource("2_onrkg")
+yummy_audio = NodePath("yummy")
+
+[node name="Hamster" parent="." instance=ExtResource("1_4flbx")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_onrkg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -3.69465e-08, 7.92319e-08, 0, 0.906308, 0.422618, -8.74228e-08, 0.422618, -0.906308, 0, 1, -1.25)
+fov = 90.0
+
+[node name="Control" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 32.0
+offset_right = 40.0
+offset_bottom = 2.0
+
+[node name="Label" type="Label" parent="Camera3D/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_fkybt")
+theme_override_font_sizes/font_size = 50
+text = "CURRENT SPEED: %s"
+script = ExtResource("3_6t5aa")
+
+[node name="SpotLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 0.0746602, -0.0513453)
+
+[node name="PlayerArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea3D"]
+transform = Transform3D(0.25, 0, 0, 0, -0.25, 2.18557e-08, 0, -2.18557e-08, -0.25, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_onrkg")
+
+[node name="yummy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_vgqql")
+volume_db = -14.0

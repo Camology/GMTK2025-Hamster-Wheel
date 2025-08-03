@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca03qkeov6o47"]
+
+[ext_resource type="PackedScene" uid="uid://dis5eyvp4evgi" path="res://models/Hamster.glb" id="1_3e0b4"]
+
+[node name="Hamster" instance=ExtResource("1_3e0b4")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)

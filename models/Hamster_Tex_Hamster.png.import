@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://hie5qpnmxpx8"
+path.s3tc="res://.godot/imported/Hamster_Tex_Hamster.png-202b03e0e3afe681a3f9399ce53fc473.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "b6dee53c6a5fb5c6a091261908cb6785"
+}
+
+[deps]
+
+source_file="res://models/Hamster_Tex_Hamster.png"
+dest_files=["res://.godot/imported/Hamster_Tex_Hamster.png-202b03e0e3afe681a3f9399ce53fc473.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

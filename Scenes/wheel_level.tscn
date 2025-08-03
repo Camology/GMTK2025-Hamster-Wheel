@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmmdgss5s1jd1"]
+
+[ext_resource type="PackedScene" uid="uid://brss8ocu85i55" path="res://models/Wheel.glb" id="1_l6l28"]
+[ext_resource type="Script" uid="uid://bydfr6acw7y2q" path="res://Scripts/wheel_control.gd" id="2_b73vx"]
+[ext_resource type="Script" uid="uid://kkfjlp6fufxv" path="res://Scripts/area_spawn.gd" id="3_vui08"]
+[ext_resource type="Script" uid="uid://dixpmny3l1xx5" path="res://Scripts/pivot.gd" id="4_aibd1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b73vx"]
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+
+[node name="Wheel" parent="." instance=ExtResource("1_l6l28")]
+transform = Transform3D(-4.37114e-08, 0, 2.2, 0, 1, 0, -1, 0, -9.61651e-08, 0, 0, 0)
+script = ExtResource("2_b73vx")
+
+[node name="SpawnArea3D" type="Area3D" parent="." node_paths=PackedStringArray("wheel_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45806, 0)
+script = ExtResource("3_vui08")
+wheel_node = NodePath("../Wheel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea3D"]
+transform = Transform3D(-4.37114e-08, -2.5, 0, 1, -1.09278e-07, 0, 0, 0, 1, 0, 0.19001, 0)
+shape = SubResource("CapsuleShape3D_b73vx")
+
+[node name="Pivot" type="Node3D" parent="SpawnArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+script = ExtResource("4_aibd1")

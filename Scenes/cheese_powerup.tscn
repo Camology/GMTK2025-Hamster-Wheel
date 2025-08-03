@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://8sex4faub4e2"]
+
+[ext_resource type="Script" uid="uid://puak7ifw7r0y" path="res://Scripts/cheese.gd" id="2_eb0ss"]
+[ext_resource type="PackedScene" uid="uid://cuv17svvweud5" path="res://models/Cheese Block.glb" id="2_skfma"]
+[ext_resource type="AudioStream" uid="uid://iqt4qikhpqyy" path="res://Audio/munch.wav" id="3_3kmcn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dcjnv"]
+
+[node name="Node3D" type="MeshInstance3D" node_paths=PackedStringArray("collision_area", "munch_audio")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+script = ExtResource("2_eb0ss")
+collision_area = NodePath("CheeseArea3D")
+munch_audio = NodePath("Munching")
+
+[node name="model" parent="." instance=ExtResource("2_skfma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886132, 0)
+
+[node name="CheeseArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CheeseArea3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+shape = SubResource("BoxShape3D_dcjnv")
+
+[node name="Munching" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3kmcn")
+volume_db = -12.0
